@@ -13,7 +13,7 @@ CFLAGS += -O3
 # a larger size should be faster, but takes more runtime memory
 #BUFFERSIZE = 4096
 #BUFFERSIZE = 65536
-BUFFERSIZE = 16777216
+#BUFFERSIZE = 16777216
 
 SOURCES = base64.cc
 
@@ -22,7 +22,7 @@ TARGETS = $(BINARIES)
 LINK.o = g++
 
 CFLAGS += -Werror -pedantic
-CFLAGS += -DBUFFERSIZE=$(BUFFERSIZE)
+#CFLAGS += -DBUFFERSIZE=$(BUFFERSIZE)
 CFLAGS += -I../include
 
 CXXFLAGS += $(CFLAGS)

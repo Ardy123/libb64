@@ -19,21 +19,25 @@ namespace base64
 
 	struct encoder
 	{
+		enum { BUFFERSIZE = 65536 };
+
 		base64_encodestate _state;
 		int _buffersize;
 
 		encoder(int buffersize_in = BUFFERSIZE)
 		: _buffersize(buffersize_in)
-		{}
+		{
+			base64_init_encodestate(&_state);
+		}
 
 		int encode(char value_in)
 		{
 			return base64_encode_value(value_in);
 		}
 
-		int encode(const char* code_in, const int length_in, char* plaintext_out)
+		int encode(const char* plaintext_in, int length_in, char* code_out)
 		{
-			return base64_encode_block(code_in, length_in, plaintext_out, &_state);
+			return base64_encode_block(plaintext_in, length_in, code_out, &_state);
 		}
 
 		int encode_end(char* plaintext_out)
@@ -43,8 +47,6 @@ namespace base64
 
 		void encode(std::istream& istream_in, std::ostream& ostream_in)
 		{
-			base64_init_encodestate(&_state);
-			//
 			const int N = _buffersize;
 			char* plaintext = new char[N];
 			char* code = new char[2*N];
