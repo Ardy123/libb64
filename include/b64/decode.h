@@ -19,6 +19,8 @@ namespace base64
 
 	struct decoder
 	{
+        enum { BUFFERSIZE = 65536 };
+
 		base64_decodestate _state;
 		int _buffersize;
 

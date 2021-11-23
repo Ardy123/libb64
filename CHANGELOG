@@ -3,6 +3,11 @@ libb64: Base64 Encoding/Decoding Routines
 
 ## Changelog ##
 
+Version 1.2.2 Release
+---------------------
+Added support for CMake build systems
+Applied integer-overflows-3.diff, static-chars-per-line.diff & cpp-encoding.patch from community.
+
 Version 1.2.1 Release
 ---------------------
 Fixed a long-standing bug in src/cdecode.c where value_in was not correctly
