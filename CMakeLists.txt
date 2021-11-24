@@ -20,11 +20,13 @@ if (NOT add_link_options)
     endmacro()
 endif()
 
-macro(check_gnu_linker_flag FLAG VAR)
+macro(check_linker_flag FLAG VAR)
     message("Performing Test ${VAR}")
     unset(${VAR})
-    set(CODE "int main() { return 0; }")
-    file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/stub.cpp "${CODE}\n")
+    file(
+      WRITE
+        ${CMAKE_CURRENT_BINARY_DIR}/stub.cpp
+        "int main() { return 0; }\n")
     try_compile(
       ${VAR}
       ${CMAKE_CURRENT_BINARY_DIR}
@@ -39,7 +41,7 @@ macro(check_gnu_linker_flag FLAG VAR)
     else()
         message("Performing Test ${VAR} - Failed")
     endif()
-endmacro(check_gnu_linker_flag)
+endmacro(check_linker_flag)
 
 if (B64_PIC)
    add_compile_options(-fpic)
@@ -51,8 +53,8 @@ else()
     set(B64_LIB_TYPE STATIC)
 endif()
 
-check_gnu_linker_flag(-Wl,--gc-sections GC_SECTIONS_FLAG)
-check_gnu_linker_flag(-Wl,-dead_strip DEADSTRIP_FLAG)
+check_linker_flag(-Wl,--gc-sections GC_SECTIONS_FLAG)
+check_linker_flag(-Wl,-dead_strip DEADSTRIP_FLAG)
 add_compile_options(
     -Wall
     -Werror
