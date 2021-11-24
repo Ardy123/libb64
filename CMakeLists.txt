@@ -68,8 +68,8 @@ elseif (${DEADSTRIP_FLAG})
 endif()
 
 if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
-   add_compile_options(-fstack-protector-all -O0)
-   add_definitions(-DBUILD_DEBUG)
+    add_compile_options(-fstack-protector-all -O0)
+    add_definitions(-DBUILD_DEBUG)
 elseif (${CMAKE_BUILD_TYPE} STREQUAL "Profile")
     add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-fstrict-enums>)
     add_compile_options(-fmerge-all-constants -O3 -pg -fno-inline)
@@ -81,12 +81,12 @@ elseif (${CMAKE_BUILD_TYPE} STREQUAL "Release")
         -fomit-frame-pointer
         -O3
         -fno-stack-protector)
-      add_compile_definitions(-DBUILD_RELEASE -DNDEBUG)
+    add_compile_definitions(-DBUILD_RELEASE -DNDEBUG)
 endif()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib) 
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
 # libb64
 add_library(
@@ -100,14 +100,13 @@ add_library(
     src/cdecode.c)
 target_include_directories(
     b64
-    PUBLIC
-    ./include)
+    PUBLIC ./include)
 install(
     FILES
-        include/b64/cdecode.h
-        include/b64/cencode.h
-        include/b64/decode.h
-        include/b64/encode.h
+      include/b64/cdecode.h
+      include/b64/cencode.h
+      include/b64/decode.h
+      include/b64/encode.h
     TYPE INCLUDE)
 install(TARGETS b64 LIBRARY ARCHIVE)
 
@@ -141,5 +140,5 @@ add_custom_target(test-c-example2
 install(
     TARGETS c-example1 c-example2
     RUNTIME
-        DESTINATION ${CMAKE_INSTALL_BINDIR}/examples)
+      DESTINATION ${CMAKE_INSTALL_BINDIR}/examples)
 
